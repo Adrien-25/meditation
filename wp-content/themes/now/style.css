@@ -707,9 +707,13 @@ div.wp-caption.alignright .wp-caption-text {
     min-height: 120px;
 }
 
+.horisontal-navigation > .nav-horizontal { 
+    position: absolute;
+    top: 100%;
+}
 .horisontal-navigation > .nav-horizontal > ul { 
     position: fixed;
-    --headerHeight : 67px;
+    --headerHeight : 120px;
     height: calc(100vh - var(--headerHeight));
     width: 100vw;
     background-color: white;
@@ -745,6 +749,10 @@ ul.nav-horizontal {
 
 .toggle {
 	display: block;
+	position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /* menu logo */
@@ -752,9 +760,11 @@ ul.nav-horizontal {
 .horisontal-navigation a.custom-logo-link,
 .horisontal-navigation a.small-logo {
     display: block;
-    height: 100%;
     float: left;
-    margin-left: 24px;
+	margin-left: 24px;
+	position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .custom-logo img,
