@@ -7,8 +7,8 @@ jQuery( document ).ready(function( $ ) {
     });
     
     var navHeight = document.getElementById('masthead').offsetHeight;
-    console.log(navHeight);
-    var navItem = $('.horisontal-navigation > .nav-horizontal > ul');
+    console.log('Navbar height : '+navHeight+'px');
+    var navItem = $('.horisontal-navigation .nav-horizontal');
     navItem[0].style.setProperty('--headerHeight', navHeight+'px');
 
 
