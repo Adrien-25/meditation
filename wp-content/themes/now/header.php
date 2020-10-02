@@ -19,6 +19,10 @@
 </head>
 
 <body <?php body_class(); ?>>
+
+    <?php if( is_front_page() ) 
+        do_action('splash_header');
+    ?>
     <div id="page" class="hfeed site">
         <!-- Header -->
         <header id="masthead" class="site-header" role="banner">
