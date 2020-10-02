@@ -686,13 +686,13 @@ div.wp-caption.alignright .wp-caption-text {
 	padding: 11px 8px;
 }
 
-.horisontal-navigation ul.nav-horizontal,
-.horisontal-navigation div.nav-horizontal > ul {
+.horisontal-navigation ul.menu-header-container,
+.horisontal-navigation div.menu-header-container > ul {
 	display: none;
 }
 
-.horisontal-navigation ul.nav-horizontal.visible,
-.horisontal-navigation div.nav-horizontal > ul.visible {
+.horisontal-navigation ul.menu-header-container.visible,
+.horisontal-navigation div.menu-header-container > ul.visible {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -704,14 +704,14 @@ div.wp-caption.alignright .wp-caption-text {
 .horisontal-navigation {
 	margin: 0 auto;
     text-align: right;
-    min-height: 120px;
+    min-height: 100px;
 }
 
-.horisontal-navigation > .nav-horizontal { 
+.horisontal-navigation > .menu-header-container { 
     position: absolute;
     top: 100%;
 }
-.horisontal-navigation > .nav-horizontal > ul { 
+.horisontal-navigation > .menu-header-container > ul { 
     position: fixed;
     --headerHeight : 120px;
     height: calc(100vh - var(--headerHeight));
@@ -724,8 +724,8 @@ div.wp-caption.alignright .wp-caption-text {
     text-align: center;
 }
 
-div.nav-horizontal > ul,
-ul.nav-horizontal {
+div.menu-header-container > ul,
+ul.menu-header-container {
 	margin: 0;
 	/* padding: 24px */
 }
@@ -733,7 +733,7 @@ ul.nav-horizontal {
 
 }
 
-.nav-horizontal li a {
+.menu-header-container li a {
 	font-size: 40px;
 	line-height: 2;
     text-transform: uppercase;
