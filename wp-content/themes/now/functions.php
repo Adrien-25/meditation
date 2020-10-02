@@ -19,6 +19,14 @@ if ( ! function_exists( 'now_setup' ) ) :
  * @since Now 1.0.0
  */
 
+// register_nav_menus(
+//     array(
+//     'primary-menu' => __( 'Primary Menu' ),
+//     'secondary-menu' => __( 'Secondary Menu' )
+//     )
+// );
+
+
 function now_setup() {
 
     $defaults = now_get_defaults();
@@ -26,15 +34,17 @@ function now_setup() {
 	/* default values */
 	global $now_defaults;
 	$now_defaults = null;
-
 	if ( '1' == now_get_theme_mod( 'is_show_top_menu' ) )
 		register_nav_menu( 'top1', __( 'Top Menu', 'now' ));
-	
-	add_theme_support( 'automatic-feed-links' );
 
-	add_theme_support( 'custom-background', array(
-		'default-color' => 'cccccc',
-	) );
+		add_theme_support( 'title-tag' );
+		
+		add_theme_support( 'automatic-feed-links' );
+
+		add_theme_support( 'custom-background', array(
+			'default-color' => 'cccccc',
+		) 
+	);
 
 	// Add theme support for Starter Content
 	$starter_content = array(
@@ -51,9 +61,10 @@ function now_setup() {
 			),
 		),
 	);
+	add_theme_support( 'starter-content', $starter_content );
 		
 }
-
+add_action( 'after_setup_theme', 'now_setup' );
 endif;
 
 /**
@@ -219,7 +230,8 @@ function now_header() {
 				</a><!-- .logo-section -->
 				<?php endif; ?>
 				<span class="toggle"><span class="menu-toggle"></span></span>
-				<?php wp_nav_menu( array( 'theme_location' => 'top1', 'menu_class' => 'nav-horizontal', 'fallback_cb' => 'now_empty_menu' ) ); ?>
+				
+				<?php wp_nav_menu( array( 'theme_location' => 'top1', 'menu_class' => 'nav-horizontal' ) ); ?>
 			</nav><!-- .menu-1 .horisontal-navigation -->
 			<?php endif; ?>
 		<div class="clear"></div>
