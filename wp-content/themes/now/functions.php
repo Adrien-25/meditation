@@ -68,6 +68,39 @@ add_action( 'after_setup_theme', 'now_setup' );
 endif;
 
 /**
+ * Return the Google font stylesheet URL if available.
+ *
+ * @since Now 1.0.0
+ */
+function now_get_font_url() {
+
+	$font_url = '';
+	$font = str_replace( ' ', '+', now_get_theme_mod( 'font_1' ) );
+	$font_2 = str_replace( ' ', '+', now_get_theme_mod( 'font_2' ) );
+	$font_3 = str_replace( ' ', '+', now_get_theme_mod( 'font_3' ) );
+
+	if ( '' == $font && '' == $font_2 && '' == $font_3 ) 
+		return $font_url;
+	if ( '' != $font && '' != $font_2 )
+		$font .= '%7C';
+		
+	$font .= $font_2;	
+	
+	if ( '' != $font && '' != $font_3 )
+		$font .= '%7C';
+
+	$font .= $font_3;
+	
+	$subsets = 'latin,latin-ext';
+	$family = $font . ':300,400';
+
+	$font_url = "//fonts.googleapis.com/css?family=" . $family . '&' . $subsets;
+
+	return $font_url;
+}
+
+
+/**
  * Enqueue scripts and styles for front-end.
  *
  * @since Now 1.0.0
@@ -78,6 +111,10 @@ function now_scripts_styles() {
 
 	// Add Genericons font.
 	wp_enqueue_style( 'now-genericons', get_template_directory_uri() . '/genericons/genericons.css', array(), NOW_VERSION );
+
+	$font_url = now_get_font_url();
+	if ( ! empty( $font_url ) )
+		wp_enqueue_style( 'now-fonts', esc_url_raw( $font_url ), array(), NOW_VERSION );
 
 	// Loads our main stylesheet.
 	wp_enqueue_style( 'now-style', get_stylesheet_uri(), array(), NOW_VERSION );
@@ -117,14 +154,15 @@ function now_get_defaults() {
 						'site_style' => 'full',
 						'is_defaults_post_thumbnail_background' => '1',
 						'logotype_url' =>  esc_url( get_template_directory_uri() ) . '/img/logo.png',
+						'scrolltype_url' =>  esc_url( get_template_directory_uri() ) . '/img/scroll.png',
 						'is_show_top_menu' => '1',
 						'post_thumbnail_size' => '400',
 						'scroll_button' => 'none',
 						'scroll_animate' => 'none',
 						'is_header_on_front_page_only' => '',
 						'font_scheme' => 2,
-						'font_1' => 'Open Sans',
-						'font_2' => 'Pangolin',
+						'font_1' => 'Lora',
+						'font_2' => 'Lora',
 						'font_3' => 'Tangerine',
 						'site_font' => 1,
 						'header_font' => 2,
@@ -213,30 +251,43 @@ function now_get_theme_mod( $name ) {
  *
  * @since Now 1.0.0
  */
-
+function splash_header() {
+?>
+	<?php if( have_posts() ) : while( have_posts() ) : the_post(); ?>
+		<div id="splash-header" class="splash-header">
+			<span>Welcome</span>
+			<div>
+				<h1 class="splash-title"><?php the_title(); ?></h1>
+				<h2>NOTHING ELSE</h2>
+			</div>
+			<a class="splash-scroll" href="#site-header">
+				<div class="scroll animated fadeInUp"></div>
+			</a>
+		</div><!-- .splash-header -->
+	<?php endwhile; endif; 
+}
+add_action('splash_header', 'splash_header');
 function now_header() {
+?>
 
-    ?>
-<div id="sg-site-header" class="sg-site-header">
-	<!-- First Top Menu -->
-	<div class="menu-top top-1-navigation">
-		<?php if ( now_get_theme_mod( 'is_show_top_menu' ) == '1' ) : ?>
-			<nav class="horisontal-navigation menu-1" role="navigation">
-				<?php if ( '' != now_get_theme_mod( 'logotype_url' ) ) : ?>
-				<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
-					title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
-					<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="menu-logo"
-						alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
-				</a><!-- .logo-section -->
+	<div id="site-header" class="site-header">
+		<!-- First Top Menu -->
+		<div class="menu-top top-1-navigation">
+			<?php if ( now_get_theme_mod( 'is_show_top_menu' ) == '1' ) : ?>
+				<nav class="horisontal-navigation menu-1" role="navigation">
+					<?php if ( '' != now_get_theme_mod( 'logotype_url' ) ) : ?>
+					<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
+						title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
+						<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="menu-logo"
+							alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
+					</a><!-- .logo-section -->
+					<?php endif; ?>
+					<span class="toggle"><span class="menu-toggle"></span></span>
+					<?php wp_nav_menu( array( 'theme_location' => 'top1', 'menu_class' => 'nav-horizontal' ) ); ?>
+				</nav><!-- .menu-1 .horisontal-navigation -->
 				<?php endif; ?>
-				<span class="toggle"><span class="menu-toggle"></span></span>
-				
-				<?php wp_nav_menu( array( 'theme_location' => 'top1', 'menu_class' => 'nav-horizontal' ) ); ?>
-			</nav><!-- .menu-1 .horisontal-navigation -->
-			<?php endif; ?>
-		<div class="clear"></div>
-	</div><!-- .menu-top  -->
-</div><!-- .sg-site-header -->
+		</div><!-- .menu-top  -->
+	</div><!-- .site-header -->
 <?php
 }
 add_action('now_header', 'now_header');
