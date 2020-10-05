@@ -19,14 +19,6 @@ if ( ! function_exists( 'now_setup' ) ) :
  * @since Now 1.0.0
  */
 
-// register_nav_menus(
-//     array(
-//     'primary-menu' => __( 'Primary Menu' ),
-//     'secondary-menu' => __( 'Secondary Menu' )
-//     )
-// );
-
-
 function now_setup() {
 
     $defaults = now_get_defaults();
@@ -45,6 +37,17 @@ function now_setup() {
 			'default-color' => 'cccccc',
 		) 
 	);
+
+	$args = array(
+		'default-image'          => esc_url( get_template_directory_uri() ) . '/img/header.jpg',
+		'header-text'            => true,
+		// 'default-text-color'     => now_text_color(get_theme_mod('color_scheme'), $defaults ['color_scheme']),
+		'width'                  => absint( now_get_theme_mod('size_image') ),
+		'height'                 => absint( now_get_theme_mod('size_image_height') ),
+		'flex-height'            => true,
+		'flex-width'             => true,
+	);
+	add_theme_support( 'custom-header', $args );
 
 	// Add theme support for Starter Content
 	$starter_content = array(
@@ -257,7 +260,7 @@ function splash_header() {
 		<div id="splash-header" class="splash-header">
 			<span>Welcome</span>
 			<div>
-				<h1 class="splash-title"><?php the_title(); ?></h1>
+				<h1 class="splash-title"><?php echo bloginfo( 'name' ); ?></h1>
 				<h2>NOTHING ELSE</h2>
 			</div>
 			<a class="splash-scroll" href="#site-header">
@@ -291,6 +294,33 @@ function now_header() {
 <?php
 }
 add_action('now_header', 'now_header');
+
+function now_slider_image(){
+	if (  now_get_theme_mod( 'is_header_on_front_page_only' ) != '1' || is_front_page()  ) : ?>	
+		
+		<!-- Banner -->
+		<div class="image-container">
+			<div class="image-wrapper">
+				<div class="image-text-wrap">
+					<div class="image-text">
+						<!-- Description -->
+						<div class="site-description">
+							<h2><?php echo bloginfo( 'description' ); ?></h2>
+						</div><!-- .site-description -->
+						
+					</div><!-- .image-text -->
+					<a class="header-image-layout" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+						<img src="<?php header_image(); ?>" class="header-image" alt="Meditation" />
+					</a>
+					<hr class="">
+				</div><!-- .image-text-wrap -->
+			</div><!-- .image-wrapper -->
+		</div><!-- .image-container -->
+	
+	
+<?php endif;
+}
+add_action('now_slider_image', 'now_slider_image');
 
 /**
  * Fallback Menu
