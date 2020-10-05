@@ -13,6 +13,9 @@ if( ! ( '' == now_get_theme_mod('front_page_style') && ! is_home()) ) :
         
         <?php do_action( 'now_slider_image' ); ?>
 
+        <h2 class="sticky-title">Starter posts</h2>
+        <?php do_action( 'sticky_posts' ); ?>
+        
     <?php endwhile; endif; 
 endif;
 get_footer(); 
