@@ -27,6 +27,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 body {
 	font-size: 100%;
 	overflow-x: hidden;
+	background-color: bisque;
 }
 
 article,
@@ -371,10 +372,10 @@ td {
 }
 
 .site hr {
-	background-color: #aaa;
+	background-color: #ED3619;
 	border: 0;
-	height: 1px;
-	margin-bottom: 23px;
+	height: 2px;
+	margin: 30px 0;
 }
 
 img {
@@ -649,6 +650,7 @@ div.wp-caption.alignright .wp-caption-text {
 * Header
 * -----------------------------------------------------------------------------
 */
+
 /**
 * Splash
 * -----------------------------------------------------------------------------
@@ -675,19 +677,19 @@ div.wp-caption.alignright .wp-caption-text {
 	transition: all 0.5s ease;
 }
 .splash-header .scroll {
-	height: 10vmin;
-	width: 6vmin;
-	border-radius: 25vmin;
+	height: 50px;
+    width: 30px;
+	border-radius: 30px;
 	border: 2px solid #ED3619;
 	position: relative;
 }
 .splash-header .scroll:before {
 	content: '';
     position: absolute;
-    left: calc(50% - 10vmin / 20);
-    top: 2vmin;
-    height: 1vmin;
-    width: 1vmin;
+    left: calc(50% - 2.5px);
+    top: 7px;
+    height: 5px;
+    width: 5px;
     background: #ED3619;
     border-radius: 50%;
     -webkit-animation: scroll 4s infinite;
@@ -804,9 +806,13 @@ div.wp-caption.alignright .wp-caption-text {
 	height: 100%;
 }
 .horisontal-navigation .menu-header-container .close-nav{
-	position: relative;
+	position: fixed;
 	top: 20px;
 	right: 20px;
+	display: none;
+}
+.horisontal-navigation .menu-header-container.visible .close-nav{
+	display: block;
 }
 .horisontal-navigation .menu-header-container .close-nav:before{
 	content: '\f406';
@@ -848,6 +854,26 @@ div.wp-caption.alignright .wp-caption-text {
 * Content
 * -----------------------------------------------------------------------------
 */
+
+.main-area{
+	padding: 0 10px;
+}
+
+.site-description h2 {
+	margin: 30px;
+    text-align: center;
+	color: black;
+	line-height: 1.25;
+}
+
+.header-image-layout {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 0;
+    padding: 10px;
+    border: 2px solid #ED3619;
+}
 
 /**
 * Read More
