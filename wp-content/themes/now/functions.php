@@ -37,6 +37,8 @@ function now_setup() {
 			'default-color' => 'cccccc',
 		) 
 	);
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( now_get_theme_mod( 'post_thumbnail_size' ) , 9999 ); 
 
 	$args = array(
 		'default-image'          => esc_url( get_template_directory_uri() ) . '/img/header.jpg',
@@ -65,7 +67,7 @@ function now_setup() {
 		),
 	);
 	add_theme_support( 'starter-content', $starter_content );
-		
+
 }
 add_action( 'after_setup_theme', 'now_setup' );
 endif;
@@ -321,6 +323,50 @@ function now_slider_image(){
 <?php endif;
 }
 add_action('now_slider_image', 'now_slider_image');
+
+function sticky_posts() {
+	/* Get all sticky posts */
+	$sticky = get_option( 'sticky_posts' );
+	/* Sort the stickies with the newest ones at the top */
+	rsort( $sticky );
+	/* Get the 3 newest stickies */
+	$sticky = array_slice( $sticky, 0, 3 );
+	/* stiky posts settings */
+	$args2 = array(
+		'posts_per_page' => 10,
+		'post__in' => $sticky,
+		// 'ignore_sticky_posts' => 1
+	);
+	/* Query sticky posts */
+	$query = new WP_Query( $args2 );
+	// The Loop
+	if ( $query->have_posts() ) {
+		echo '<ul class="sticky-posts">';
+		while ( $query->have_posts() ) {
+			$query->the_post();
+			echo '<li id="post-'. get_the_ID() .'">';
+			echo '<div class="sp-thumbnail">';
+			if (has_post_thumbnail()) :
+				echo get_the_post_thumbnail() ;
+			else :
+				echo '<img src="'. esc_url( now_get_theme_mod( 'empty_image' ) ).'">';
+			endif;
+			echo '</div>';
+			echo '<div class="sp-content">';
+				echo '<h3 class="sp-title">' . get_the_title() . '</h3>';
+				echo '<div class="sp-excerpt">' . get_the_excerpt() . '</div>';
+				echo '<a class="sp-link" href="' . get_permalink() . '">Read more</a>';
+				
+			echo '</div>';
+			echo '<hr>';
+			echo '</li>';
+		}
+		echo '</ul>';
+	}
+	/* Restore original Post Data */
+	wp_reset_postdata();
+}
+add_action('sticky_posts', 'sticky_posts'); 
 
 /**
  * Fallback Menu
