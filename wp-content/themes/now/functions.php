@@ -68,6 +68,9 @@ function now_setup() {
 	);
 	add_theme_support( 'starter-content', $starter_content );
 
+
+	
+
 }
 add_action( 'after_setup_theme', 'now_setup' );
 endif;
@@ -368,6 +371,39 @@ function sticky_posts() {
 }
 add_action('sticky_posts', 'sticky_posts'); 
 
+/*
+* Set post views count using post meta
+*/
+function setPostViews($postID) {
+	$countKey = 'wpb_post_views_count';
+	$count = get_post_meta($postID, $countKey, true);
+	if($count==''){
+		$count = 0;
+		delete_post_meta($postID, $countKey);
+		add_post_meta($postID, $countKey, '0');
+	}else{
+		$count++;
+		update_post_meta($postID, $countKey, $count);
+	}
+}
+add_action('setPostViews','setPostViews',10, 1);
+
+function popular_posts() {
+	$popularpost = new WP_Query( array( 'posts_per_page' => 5, 'meta_key' => 'wpb_post_views_count', 'orderby' => 'meta_value_num', 'order' => 'DESC'  ) );
+	
+	// var_dump($popularpost);
+	while ( $popularpost->have_posts() ) : $popularpost->the_post();?>
+	
+		<div class="popular-posts">
+			<a href="<?php the_permalink() ?>" class="pp-thumbnail"><?php the_post_thumbnail() ?></a>
+			<div class="pp-content">
+				<h4 class="pp-title"><?php the_title(); ?></h4>
+				<?php the_category(); ?>
+			</div>
+		</div>
+	<?php endwhile;    
+}
+add_action('popular_posts', 'popular_posts'); 
 /**
  * Fallback Menu
  *
