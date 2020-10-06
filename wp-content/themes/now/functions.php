@@ -28,6 +28,7 @@ function now_setup() {
 	$now_defaults = null;
 	if ( '1' == now_get_theme_mod( 'is_show_top_menu' ) )
 		register_nav_menu( 'top1', __( 'Top Menu', 'now' ));
+		register_nav_menu( 'footer-nav', __( 'Footer Menu', 'now' ));
 
 		add_theme_support( 'title-tag' );
 		
@@ -57,6 +58,15 @@ function now_setup() {
 		'nav_menus' => array(
 			'top1' => array(
 				'name' => __( 'Top Menu', 'now' ),
+				'items' => array(
+					'link_home', 
+					'page_blog',
+					'page_category',
+					'page_contact',
+				),
+			),
+			'footer-nav' => array(
+				'name' => __( 'Footer Menu', 'now' ),
 				'items' => array(
 					'link_home', 
 					'page_blog',
@@ -400,8 +410,11 @@ function popular_posts() {
 				<h4 class="pp-title"><?php the_title(); ?></h4>
 				<?php the_category(); ?>
 			</div>
+			
 		</div>
-	<?php endwhile;    
+	<?php endwhile; ?>   
+	<hr>
+<?php
 }
 add_action('popular_posts', 'popular_posts'); 
 /**
@@ -412,3 +425,49 @@ add_action('popular_posts', 'popular_posts');
 function now_empty_menu() {
 	return wp_page_menu( 'menu_class=nav-horizontal');
 }
+
+/**
+ * Print credit links and scroll to top button
+ *
+ * @since Now 1.0.0
+ */
+function now_site_info() {
+	$text = now_get_theme_mod( 'footer_text' );
+	if ( '' != $text ) :
+	?>
+		<div class="site-info">
+			<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
+				title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
+				<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="footer-logo"
+					alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
+			</a><!-- .logo-section -->
+			<?php wp_nav_menu( array( 'theme_location' => 'footer-nav', 'menu_class' => 'footer-nav' , 'menu_id' => 'footer-nav') ); 
+			// get_search_form()?>
+			<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<div>
+					<input type="text" value="" name="s" id="s">
+					<button type="submit" id="searchsubmit" value="">
+						<span class="search-icon">
+						</span>
+					</button>
+				</div>
+			</form>
+			<div>
+		</div><!-- .site-info -->
+		
+		<!--<div class="">
+			<?php var_dump (get_privacy_policy_url()); ?>
+		</div>--><!-- .site-privacy -->
+		
+		<div class="footer-bottom">
+			<?php  ?>
+			<span>Created by <a href="https://adrienschmidt.fr/portfolio/"><?php the_author();?></a> | Theme <span class="theme-name"><?php echo wp_get_theme() ?></span> </span>
+		</div>
+		<?php endif; 
+		
+		if ( 'none' != now_get_theme_mod( 'scroll_button' ) ) : ?>
+			<a href="#" class="scrollup <?php echo esc_attr( now_get_theme_mod( 'scroll_button' )).
+				esc_attr( 'none' == now_get_theme_mod( 'scroll_animate' ) ? '' : ' ' . now_get_theme_mod( 'scroll_animate' ) ); ?>"></a>
+	<?php endif;
+}
+add_action( 'now_site_info', 'now_site_info' );
