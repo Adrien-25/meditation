@@ -7,12 +7,20 @@ Description: Mon premier thème !
 Requires at least: WordPress 5.0
 Version: 1.0.0
 */
+
+@font-face {
+	font-family: 'Lora-Regular';
+	src: url('font/Lora-Regular.eot');
+	src: local('☺'), url('font/Lora-Regular.woff') format('woff'), url('font/Lora-Regular.ttf') format('truetype'), url('font/Lora-Regular.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
 #wpadminbar{
     display: none;
 }
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 	border: 0;
-	font-family: inherit;
+	font-family: 'Lora-Regular';
 	font-size: 100%;
 	font-style: inherit;
 	font-weight: inherit;
@@ -270,9 +278,6 @@ ol {
 	list-style: none;
 }
 
-ul {
-	list-style: disc;
-}
 
 ol {
 	list-style: decimal inside;
@@ -846,6 +851,97 @@ div.wp-caption.alignright .wp-caption-text {
 }
 
 /**
+* Footer
+* -----------------------------------------------------------------------------
+*/
+
+.site-footer .site-info {
+	display: flex;
+    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.site-footer .small-logo {
+	text-align: center;
+	width: fit-content;
+}
+.site-footer .footer-logo {
+	max-height: 100px;
+	margin: 20px 0;
+}
+.site-footer .footer-nav {
+	text-align: center;
+}
+.site-footer .menu-footer-container .menu-item a {
+	font-size: 14px;
+	line-height: 2;
+    text-transform: uppercase;
+    -webkit-transition: all 0.4s ease-in;
+    transition: all 0.4s ease-in;
+	color: #ED3619;
+}
+
+.site-footer .searchform > div {
+    display: flex;
+    margin: 20px 0;
+}
+
+.site-footer  .searchform #s {
+	width: 100%;
+    border: 3px solid #ed3619;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+	color: black;
+	box-sizing: content-box;
+	background-color: white;;
+}
+
+.site-footer .searchform #searchsubmit {
+	width: 40px;
+    height: 36px;
+    border: 1px solid #ed3619;
+    background: #ed3619;
+    text-align: center;
+    color: #ffe4c4;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    padding: 0;
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.site-footer .search-icon::before {
+	content: '\f400';
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    font: normal 30px/1 'Genericons';
+    line-height: 1.5;
+    vertical-align: middle;
+    color: #ffe4c4;
+}
+
+.site-footer .footer-bottom {
+	padding: 24px 0;
+	background-color: #ED3619;
+	width: 100%;
+	color: white;
+	font-size: 14px;
+	text-align: center;
+}
+.site-footer .footer-bottom a{
+	color: black;
+	text-decoration:underline	;
+}
+.site-footer .footer-bottom .theme-name{
+	color: black;
+	font-weight: bold;
+}
+
+/**
 * Content
 * -----------------------------------------------------------------------------
 */
@@ -873,8 +969,11 @@ div.wp-caption.alignright .wp-caption-text {
 
 .main-area .sticky-title, .main-area .popular-title {
 	text-align: center;
-	color: black;
-	font-size: 30px;
+	font-size: 40px;
+	background: linear-gradient(to right, #489c37 0%, #ed3619 100%);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
 }
 /* Sticky posts*/
 
@@ -884,9 +983,10 @@ div.wp-caption.alignright .wp-caption-text {
 
 .sticky-posts .sp-thumbnail{
 	text-align: center;
-	margin: 20px 0;
+	margin: 20px 10px;
 	max-height: 400px;
-    overflow: hidden;
+	overflow: hidden;
+	box-shadow: 3px 5px 15px 5px rgba(0,0,0,0.8);
 }
 
 .sticky-posts .sp-thumbnail img{
