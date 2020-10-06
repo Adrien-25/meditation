@@ -10,6 +10,7 @@ jQuery( document ).ready(function( $ ) {
     return false;
   });
   
+  $('.site-footer #searchsubmit').val("");
 
 	// $('.nav-horizontal li').bind('mouseover', meditation_openSubMenu);
     var is_scroll = false;
