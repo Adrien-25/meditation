@@ -1051,7 +1051,79 @@ div.wp-caption.alignright .wp-caption-text {
 	color: #ED3619;
 }
 
+/* Archive */
 
+.archive h1 {
+	margin-top: 30px;
+	font-size: 40px;
+}
+.archive .top-separatation {
+	margin-top: 10px;
+}
+.archive h2 {
+	font-size: 18px;
+	text-transform: uppercase;
+}
+.archive .posts-layout {
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.archive .post {
+	display: flex;
+	flex-direction: column;
+	color: white;
+	text-align: center;
+	margin: 20px 0;
+}
+.archive .post .post-thumbnail-layout {
+	width: 400px;
+	background-color: grey;
+	border-radius: 10px 10px 0 0;
+}
+.archive .post .attachment-post-thumbnail {
+	border-radius: 10px 10px 0 0;
+	width: 400px;
+}
+.archive .post h3,.main-area .archive .post a{
+	color: white;
+}
+.archive .post .post-content {
+	border-radius: 0 0 10px 10px;
+	background-color: #ED3619;
+	max-width: 400px;
+}
+.archive .post .post-content .post-categories a{
+	text-transform: uppercase;
+	font-size: 12px;
+    font-weight: lighter;
+	font-style: italic;
+	margin-top: 10px;
+}
+.archive .post .post-content h3{
+	margin: 30px 0;
+}
+.archive .post .post-content p{
+	margin: 0;
+}
+	
+.archive .post .post-content  .post-info{
+	display: flex;
+    justify-content: space-around;
+}
+.archive .post .post-content  .post-info{
+	display: flex;
+	justify-content: space-around;
+	margin: 10px 0;
+}
+.archive .post .post-content  .post-info p{
+	margin: 0;
+	flex: 50%;
+	font-style: italic;
+	font-size: 14px;
+}
+
+							
 
 
 /**
