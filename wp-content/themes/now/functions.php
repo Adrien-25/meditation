@@ -271,68 +271,68 @@ function now_get_theme_mod( $name ) {
  */
 function splash_header() {
 ?>
-	<?php if( have_posts() ) : while( have_posts() ) : the_post(); ?>
-		<div id="splash-header" class="splash-header">
-			<span>Welcome</span>
-			<div>
-				<h1 class="splash-title"><?php echo bloginfo( 'name' ); ?></h1>
-				<h2>NOTHING ELSE</h2>
-			</div>
-			<a class="splash-scroll" href="#site-header">
-				<div class="scroll animated fadeInUp"></div>
-			</a>
-		</div><!-- .splash-header -->
-	<?php endwhile; endif; 
+<?php if( have_posts() ) : while( have_posts() ) : the_post(); ?>
+<div id="splash-header" class="splash-header">
+	<span>Welcome</span>
+	<div>
+		<h1 class="splash-title"><?php echo bloginfo( 'name' ); ?></h1>
+		<h2>NOTHING ELSE</h2>
+	</div>
+	<a class="splash-scroll" href="#site-header">
+		<div class="scroll animated fadeInUp"></div>
+	</a>
+</div><!-- .splash-header -->
+<?php endwhile; endif; 
 }
 add_action('splash_header', 'splash_header');
 function now_header() {
 ?>
 
-	<div id="site-header" class="site-header">
-		<!-- First Top Menu -->
-		<div class="menu-top top-1-navigation">
-			<?php if ( now_get_theme_mod( 'is_show_top_menu' ) == '1' ) : ?>
-				<nav class="horisontal-navigation menu-1" role="navigation">
-					<?php if ( '' != now_get_theme_mod( 'logotype_url' ) ) : ?>
-					<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
-						title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
-						<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="menu-logo"
-							alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
-					</a><!-- .logo-section -->
-					<?php endif; ?>
-					<span class="toggle"><span class="menu-toggle"></span></span>
-					<?php wp_nav_menu( array( 'theme_location' => 'top1', 'menu_class' => 'nav-horizontal' ) ); ?>
-				</nav><!-- .menu-1 .horisontal-navigation -->
-				<?php endif; ?>
-		</div><!-- .menu-top  -->
-	</div><!-- .site-header -->
+<div id="site-header" class="site-header">
+	<!-- First Top Menu -->
+	<div class="menu-top top-1-navigation">
+		<?php if ( now_get_theme_mod( 'is_show_top_menu' ) == '1' ) : ?>
+		<nav class="horisontal-navigation menu-1" role="navigation">
+			<?php if ( '' != now_get_theme_mod( 'logotype_url' ) ) : ?>
+			<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
+				title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
+				<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="menu-logo"
+					alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
+			</a><!-- .logo-section -->
+			<?php endif; ?>
+			<span class="toggle"><span class="menu-toggle"></span></span>
+			<?php wp_nav_menu( array( 'theme_location' => 'top1', 'menu_class' => 'nav-horizontal' ) ); ?>
+		</nav><!-- .menu-1 .horisontal-navigation -->
+		<?php endif; ?>
+	</div><!-- .menu-top  -->
+</div><!-- .site-header -->
 <?php
 }
 add_action('now_header', 'now_header');
 
 function now_slider_image(){
-	if (  now_get_theme_mod( 'is_header_on_front_page_only' ) != '1' || is_front_page()  ) : ?>	
-		
-		<!-- Banner -->
-		<div class="image-container">
-			<div class="image-wrapper">
-				<div class="image-text-wrap">
-					<div class="image-text">
-						<!-- Description -->
-						<div class="site-description">
-							<h2><?php echo bloginfo( 'description' ); ?></h2>
-						</div><!-- .site-description -->
-						
-					</div><!-- .image-text -->
-					<a class="header-image-layout" href="<?php echo esc_url( home_url( '/' ) ); ?>">
-						<img src="<?php header_image(); ?>" class="header-image" alt="Meditation" />
-					</a>
-					<hr class="">
-				</div><!-- .image-text-wrap -->
-			</div><!-- .image-wrapper -->
-		</div><!-- .image-container -->
-	
-	
+	if (  now_get_theme_mod( 'is_header_on_front_page_only' ) != '1' || is_front_page()  ) : ?>
+
+<!-- Banner -->
+<div class="image-container">
+	<div class="image-wrapper">
+		<div class="image-text-wrap">
+			<div class="image-text">
+				<!-- Description -->
+				<div class="site-description">
+					<h2><?php echo bloginfo( 'description' ); ?></h2>
+				</div><!-- .site-description -->
+
+			</div><!-- .image-text -->
+			<a class="header-image-layout" href="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<img src="<?php header_image(); ?>" class="header-image" alt="Meditation" />
+			</a>
+			<hr class="">
+		</div><!-- .image-text-wrap -->
+	</div><!-- .image-wrapper -->
+</div><!-- .image-container -->
+
+
 <?php endif;
 }
 add_action('now_slider_image', 'now_slider_image');
@@ -403,17 +403,17 @@ function popular_posts() {
 	
 	// var_dump($popularpost);
 	while ( $popularpost->have_posts() ) : $popularpost->the_post();?>
-	
-		<div class="popular-posts">
-			<a href="<?php the_permalink() ?>" class="pp-thumbnail"><?php the_post_thumbnail() ?></a>
-			<div class="pp-content">
-				<h4 class="pp-title"><?php the_title(); ?></h4>
-				<?php the_category(); ?>
-			</div>
-			
-		</div>
-	<?php endwhile; ?>   
-	<hr>
+
+<div class="popular-posts">
+	<a href="<?php the_permalink() ?>" class="pp-thumbnail"><?php the_post_thumbnail() ?></a>
+	<div class="pp-content">
+		<h4 class="pp-title"><?php the_title(); ?></h4>
+		<?php the_category(); ?>
+	</div>
+
+</div>
+<?php endwhile; ?>
+<hr>
 <?php
 }
 add_action('popular_posts', 'popular_posts'); 
@@ -435,39 +435,71 @@ function now_site_info() {
 	$text = now_get_theme_mod( 'footer_text' );
 	if ( '' != $text ) :
 	?>
-		<div class="site-info">
-			<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
-				title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
-				<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="footer-logo"
-					alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
-			</a><!-- .logo-section -->
-			<?php wp_nav_menu( array( 'theme_location' => 'footer-nav', 'menu_class' => 'footer-nav' , 'menu_id' => 'footer-nav') ); 
+<div class="site-info">
+	<a class="small-logo" href='<?php echo esc_url( home_url( '/' ) ); ?>'
+		title='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>' rel='home'>
+		<img src='<?php echo esc_url( now_get_theme_mod( 'logotype_url' ) ); ?>' class="footer-logo"
+			alt='<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>'>
+	</a><!-- .logo-section -->
+	<?php wp_nav_menu( array( 'theme_location' => 'footer-nav', 'menu_class' => 'footer-nav' , 'menu_id' => 'footer-nav') ); 
 			// get_search_form()?>
-			<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<div>
-					<input type="text" value="" name="s" id="s">
-					<button type="submit" id="searchsubmit" value="">
-						<span class="search-icon">
-						</span>
-					</button>
-				</div>
-			</form>
-			<div>
-		</div><!-- .site-info -->
-		
-		<!--<div class="">
-			<?php var_dump (get_privacy_policy_url()); ?>
-		</div>--><!-- .site-privacy -->
-		
-		<div class="footer-bottom">
-			<?php  ?>
-			<span>Created by <a href="https://adrienschmidt.fr/portfolio/"><?php the_author();?></a> | Theme <span class="theme-name"><?php echo wp_get_theme() ?></span> </span>
+	<form role="search" method="get" id="searchform" class="searchform"
+		action="<?php echo esc_url( home_url( '/' ) ); ?>">
+		<div>
+			<input type="text" value="" name="s" id="s">
+			<button type="submit" id="searchsubmit" value="">
+				<span class="search-icon">
+				</span>
+			</button>
 		</div>
-		<?php endif; 
+	</form>
+	<div>
+	</div><!-- .site-info -->
+
+	<!--<div class="">
+			<?php var_dump (get_privacy_policy_url()); ?>
+		</div>-->
+	<!-- .site-privacy -->
+
+	<div class="footer-bottom">
+		<?php  ?>
+		<span>Created by <a href="https://adrienschmidt.fr/portfolio/"><?php the_author();?></a> | Theme <span
+				class="theme-name"><?php echo wp_get_theme() ?></span> </span>
+	</div>
+	<?php endif; 
 		
 		if ( 'none' != now_get_theme_mod( 'scroll_button' ) ) : ?>
-			<a href="#" class="scrollup <?php echo esc_attr( now_get_theme_mod( 'scroll_button' )).
+	<a href="#"
+		class="scrollup <?php echo esc_attr( now_get_theme_mod( 'scroll_button' )).
 				esc_attr( 'none' == now_get_theme_mod( 'scroll_animate' ) ? '' : ' ' . now_get_theme_mod( 'scroll_animate' ) ); ?>"></a>
 	<?php endif;
 }
 add_action( 'now_site_info', 'now_site_info' );
+
+/**
+ * Archive content
+ *
+ * @since Now 1.0.0
+ */
+
+function archive_recent_entries() { ?>
+	<div id="post-<?php the_ID(); ?>" <?php post_class( 'class-name' ); ?>>
+		<div class="post-thumbnail-layout"><?php 
+		if (has_post_thumbnail()) : 
+			the_post_thumbnail() ;
+		else : ?>
+			<img class="attachment-post-thumbnail" src="<?php echo esc_url( now_get_theme_mod( 'empty_image' ) ) ?>">
+			<?php endif;?>
+		</div>
+		<div class="post-content">
+			<p class=""> <?php the_category() ?></p>
+			<h3 class=""> <?php the_title() ?></h3>
+			<div class="post-info">
+				<p class="">By: <?php the_author() ?></p>
+				<span>|</span>
+				<p class="">On: <?php the_date() ?></p>
+			</div>
+		</div>
+	</div>
+<?php }
+add_action('archive_recent_entries','archive_recent_entries');
